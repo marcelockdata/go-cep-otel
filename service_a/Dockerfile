@@ -1,4 +1,4 @@
-FROM golang:1.22 as builder
+FROM golang:1.23.4 as builder
 WORKDIR /app
 COPY . .
 RUN GOOS=linux CGO_ENABLED=0 go build -ldflags="-w -s" -o service-a main.go
