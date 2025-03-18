@@ -9,7 +9,8 @@ exporters:
     const_labels:
       label1: value1
 
-  logging:
+  debug:  # Replace 'logging' with 'debug'
+    verbosity: detailed  # Adjust verbosity as needed
 
   zipkin:
     endpoint: "http://zipkin:9411/api/v2/spans"
@@ -36,8 +37,8 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, zipkin, otlp]
+      exporters: [debug, zipkin, otlp]  # Replace 'logging' with 'debug'
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, prometheus]
+      exporters: [debug, prometheus]  # Replace 'logging' with 'debug'
