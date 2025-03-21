@@ -1,9 +1,7 @@
-FROM golang:1.23.4 as builder
+FROM golang:1.22.0-alpine
 WORKDIR /app
 COPY . .
-RUN GOOS=linux CGO_ENABLED=0 go build -ldflags="-w -s" -o service-a main.go
-
-FROM scratch
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=builder /app/service-a .
-CMD ["./service-a"]
+RUN go mod tidy
+RUN go build -o service_a .
+EXPOSE 8080
+CMD ["./service_a"]
